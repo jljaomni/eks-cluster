@@ -70,3 +70,50 @@ resource "aws_iam_role_policy_attachment" "attach_github_actions_ecr_policy" {
   role       = aws_iam_role.github_actions_role.name
   policy_arn = aws_iam_policy.github_actions_ecr_policy.arn
 }
+
+resource "aws_iam_role_policy" "s3_policy" {
+  name = "github-actions-s3-access-policy"
+  role = aws_iam_role.github_actions_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:ListBucket",
+          "s3:DeleteObject"
+        ],
+        Resource = [
+          "*"
+        ]
+      }
+    ]
+  })
+}
+
+
+resource "aws_iam_role_policy" "dynamodb_policy" {
+  name = "github-actions-dynamodb-access-policy"
+  role = aws_iam_role.github_actions_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:DescribeTable"
+        ],
+        Resource = "*"
+      }
+    ]
+  })
+}
+

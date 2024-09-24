@@ -32,3 +32,12 @@ variable "region" {
   default     = "us-east-1"
 }
 
+variable "s3_bucket_name" {
+  description = "Nombre del bucket S3 donde se almacenará el estado de Terraform"
+  default     = "terraform-state-bucket-omni"
+}
+
+variable "dynamodb_table_name" {
+  description = "Nombre de la tabla DynamoDB para el bloqueo de estados"
+  default     = "terraform-state-locks-omni"
+}

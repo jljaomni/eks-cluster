@@ -1,4 +1,4 @@
-variable "access_key" {
+/* variable "access_key" {
   description = "access_key"
   type        = string
   sensitive   = true
@@ -7,7 +7,7 @@ variable "secret_key" {
   description = "secret_key"
   type        = string
   sensitive   = true
-}
+} */
 
 variable "tags" {
   description = "Etiquetas comunes para aplicar a todos los recursos"
@@ -31,6 +31,7 @@ variable "region" {
 variable "vpc_name" {
   description = "VPC Name"
   type        = string
+  default     = "vpc-omni"
 }
 
 variable "cidr_block" {
@@ -62,11 +63,13 @@ variable "azs" {
 variable "eks_cluster_name" {
   description = "Nombre del cluster EKS"
   type        = string
+  default     = "omni-eks"
 }
 
 variable "ng_name" {    
   description = "Nombre del grupo de nodos"
   type        = string
+  default     = "ng-omni-pb"
 }
 
 variable "ng_instance_type" {    
@@ -98,3 +101,15 @@ variable "ng_min_capacity" {
   type        = string
 }
  */
+
+variable "s3_bucket_name" {
+  description = "Nombre del bucket S3"
+  type        = string
+  default     = "terraform-state-bucket-omni"
+}
+
+variable "dynamodb_table_name" {
+  description = "Nombre de la tabla DynamoDB"
+  type        = string
+  default     = "terraform-state-locks-omni"
+}
