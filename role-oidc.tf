@@ -76,21 +76,19 @@ resource "aws_iam_role_policy" "s3_policy" {
   role = aws_iam_role.github_actions_role.id
 
   policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Action = [
-          "s3:PutObject",
-          "s3:GetObject",
-          "s3:ListBucket",
-          "s3:DeleteObject"
-        ],
-        Resource = [
-          "*"
-        ]
-      }
-    ]
+  Version: "2012-10-17",
+  Statement: [
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "${aws_s3_bucket.terraform_state.arn}",
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "Resource": "${aws_s3_bucket.terraform_state.arn}/*",
+    }
+  ]
   })
 }
 
@@ -111,7 +109,7 @@ resource "aws_iam_role_policy" "dynamodb_policy" {
           "dynamodb:UpdateItem",
           "dynamodb:DescribeTable"
         ],
-        Resource = "*"
+        Resource = "${aws_dynamodb_table.terraform_locks.arn}"
       }
     ]
   })
