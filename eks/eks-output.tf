@@ -1,6 +1,3 @@
-
-
-
 # Output para obtener los nodos públicos
 output "cluster_name" {
   description = "Kubernetes Cluster Name"

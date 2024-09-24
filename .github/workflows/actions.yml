@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'service/app/**'  # Ejecutar solo si los cambios están dentro de la carpeta service
+      - 'service/app/**' 
 
 env:
   AWS_REGION: us-east-1
