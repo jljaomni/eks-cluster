@@ -9,8 +9,6 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  REPOSITORY_URI: 471112520049.dkr.ecr.us-east-1.amazonaws.com/nginx
-  IMAGE_TAG: ${{ github.run_number }} 
 
 permissions:
   id-token: write 
@@ -39,7 +37,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -no-color
 
       - name: Terraform Apply
         id: apply
