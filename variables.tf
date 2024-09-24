@@ -19,6 +19,16 @@ variable "tags" {
   type        = map(string)
   default = {
     Environment = "production"
-    Project     = "mi-proyecto"
+    Project     = "omni-magento2"
+    Terraform   = "true"
+    Owner       = "jljaomni"
+    Company     = "omni"
   }
 }
+
+variable "region" {
+  description = "Región AWS"
+  type        = string
+  default     = "us-east-1"
+}
+

@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - 'service/**'  # Ejecutar solo si los cambios están dentro de la carpeta service
+      - 'service/app/**'  # Ejecutar solo si los cambios están dentro de la carpeta service
 
 env:
   AWS_REGION: us-east-1
-  REPOSITORY_URI: 316178934648.dkr.ecr.us-east-1.amazonaws.com/nginx
+  REPOSITORY_URI: 471112520049.dkr.ecr.us-east-1.amazonaws.com/nginx
   IMAGE_TAG: ${{ github.run_number }} # GitHub run number as a unique image tag
 
 permissions:
@@ -27,7 +27,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::316178934648:role/github-actions-role
+          role-to-assume: arn:aws:iam::471112520049:role/github-actions-role
           role-session-name: ecrrolesessiontemp
           aws-region: ${{ env.AWS_REGION }}
 
