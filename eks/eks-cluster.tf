@@ -48,7 +48,7 @@ module "eks" {
       cloud_user = {
       kubernetes_groups = []
       principal_arn     = "arn:aws:iam::637423456632:user/cloud_user"
-      type              = "standard"
+      type              = "STANDARD"
 
       policy_associations = {
         cloud_user = {
