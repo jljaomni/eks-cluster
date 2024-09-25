@@ -1,4 +1,4 @@
-name: ECR Test CI/CD
+name: EKS Deploy CI/CD
 
 on:
   push:
@@ -51,8 +51,8 @@ jobs:
         run: |
           aws configure list
 
-          - name: Check kubectl
-          run: |
+      - name: Check kubectl
+        run: |
             kubectl version --client
             kubectl config view
   
