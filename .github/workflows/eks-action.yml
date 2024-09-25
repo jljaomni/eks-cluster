@@ -25,25 +25,27 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::471112520049:role/github-actions-role
+          role-to-assume: arn:aws:iam::637423456632:role/github-actions-role
           role-session-name: ecrrolesessiontemp
           aws-region: ${{ env.AWS_REGION }}
 
-      - uses: hashicorp/setup-terraform@v3
-        with:
-            terraform_version: "1.1.7"
+      - uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Init
+        id: init
         run: terraform init
-
+        working-directory: ./eks
+        
       - name: Terraform Plan
-        run: terraform plan -no-color -input=false
-        env:
-            TF_LOG: DEBUG
+        id: plan
+        run: terraform plan -no-color
+        continue-on-error: false
+        working-directory: ./eks
 
       - name: Terraform Apply
         id: apply
         run: terraform apply -auto-approve
+        working-directory: ./eks
 
       - name: Success Message
         run: echo "Success!"
