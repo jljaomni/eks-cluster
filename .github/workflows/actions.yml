@@ -11,6 +11,7 @@ env:
   AWS_REGION: us-east-1
   REPOSITORY_URI: 637423456632.dkr.ecr.us-east-1.amazonaws.com/nginx
   IMAGE_TAG: ${{ github.run_number }} # GitHub run number as a unique image tag
+  EKS_CLUSTER_NAME: omni-eks
 
 permissions:
   id-token: write 
@@ -31,6 +32,11 @@ jobs:
           role-session-name: ecrrolesessiontemp
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Set image tag
+        run: |
+          echo "Setting image tag to ${{ env.IMAGE_TAG }}"
+          sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$IMAGE_TAG"'@' service/manifest/01-nginx-deployment.yml
+
       - name: Login to AWS ECR
         run: |
           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.REPOSITORY_URI }}
@@ -44,6 +50,34 @@ jobs:
       - name: Checking AWS CLI config
         run: |
           aws configure list
+
+          - name: Check kubectl
+          run: |
+            kubectl version --client
+            kubectl config view
+  
+      - name: Update kube-confige files
+        run: |
+            aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+
+      - name: Debug kubectl configuration
+        run: |
+          cat $HOME/.kube/config
+          kubectl config current-context
+
+      - name: Configure kubectl
+        run: |
+          export KUBECONFIG=$HOME/.kube/config
+
+      - name: Debug IAM Role Permissions
+        run: |
+          aws ecr describe-repositories
+          aws eks describe-cluster --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+
+      - name: Deploy to EKS
+        run: |
+          kubectl get svc
+          kubectl apply -f service/manifest/01-nginx-deployment.yml
 
       - name: Success Message
         run: echo "La imagen se pusheó con éxito al repositorio ECR"

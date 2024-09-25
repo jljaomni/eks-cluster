@@ -115,3 +115,29 @@ resource "aws_iam_role_policy" "dynamodb_policy" {
   })
 }
 
+resource "aws_iam_role_policy" "iam_access_policy" {
+  name = "github-actions-iam-access-policy"
+  role = aws_iam_role.github_actions_role.id
+
+  policy = jsonencode({
+      Version = "2012-10-17",
+      Statement = [
+        {
+          Effect = "Allow",
+          Action = [
+            "iam:GetPolicy",
+            "iam:GetRole",
+            "iam:GetPolicyVersion"
+          ],
+          Resource = "*"
+        }
+      ]
+  })
+}
+
+##ONLY FOR TESTING PURPOSES
+
+resource "aws_iam_role_policy_attachment" "admin_access_attachment" {
+  role       = aws_iam_role.github_actions_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
