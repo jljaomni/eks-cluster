@@ -5,8 +5,5 @@ terraform {
     region         = var.region
     dynamodb_table = var.dynamodb_table_name
     encrypt        = true 
-    assume_role    = {
-      session_name = "ecrrolesessiontemp"
-    }
   }
 } 
