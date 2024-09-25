@@ -22,7 +22,7 @@ variable "region" {
 variable "vpc_name" {
   description = "VPC Name"
   type        = string
-  default     = "omni-vpc-trfm"
+  default     = "omni-vpc-tf"
 }
 
 variable "cidr_block" {
