@@ -15,7 +15,7 @@ permissions:
   contents: read  
 
 jobs:
-  eks-ecr-workflow:
+  eks-infra-workflow:
     runs-on: ubuntu-latest
 
     steps:

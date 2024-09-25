@@ -36,13 +36,32 @@ module "eks" {
     two = {
       name = "${var.ng_name}-2"
 
-      instance_types = ["t3.small"]
+      instance_types = var.ng_instance_type
 
       min_size     = var.ng_min_capacity
       max_size     = var.ng_max_capacity
       desired_size = var.ng_desired_capacity 
     }
   }
+
+  access_entries = {
+      cloud_user = {
+      kubernetes_groups = []
+      principal_arn     = "arn:aws:iam::637423456632:user/cloud_user"
+      type              = "standard"
+
+      policy_associations = {
+        cloud_user = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          access_scope = {
+            type       = "cluster"
+          }
+        }
+      }
+    }
+  }
+
+  tags = merge(var.tags, { Name = var.eks_cluster_name })
 }
 
 
