@@ -9,7 +9,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  REPOSITORY_URI: 637423456632.dkr.ecr.us-east-1.amazonaws.com/nginx
+  REPOSITORY_URI: 767397797617.dkr.ecr.us-east-1.amazonaws.com/nginx
   IMAGE_TAG: ${{ github.run_number }} # GitHub run number as a unique image tag
   EKS_CLUSTER_NAME: omni-eks
 
@@ -28,7 +28,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::637423456632:role/github-actions-role
+          role-to-assume: arn:aws:iam::767397797617:role/github-actions-role
           role-session-name: ecrrolesessiontemp
           aws-region: ${{ env.AWS_REGION }}
 
