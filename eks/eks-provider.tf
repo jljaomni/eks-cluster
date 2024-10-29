@@ -10,3 +10,15 @@ terraform {
     }
   }
 }
+
+/* provider "kubernetes" {
+  config_path = "~/.kube/config" # O puedes definir las credenciales del cluster directamente.
+}
+
+provider "helm" {
+  kubernetes {
+    config_path = "~/.kube/config"
+  }
+}
+
+ */
