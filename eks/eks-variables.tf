@@ -22,7 +22,7 @@ variable "region" {
 variable "vpc_name" {
   description = "VPC Name"
   type        = string
-  default     = "omni-vpc"
+  default     = "vpc-omni"
 }
 
 variable "cidr_block" {
