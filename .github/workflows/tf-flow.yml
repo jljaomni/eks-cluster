@@ -5,13 +5,13 @@ on:
         branches:
         - main
         paths:
-        - 'aks/**'
+        - 'eks/**'
 
     pull_request:
         branches:
         - main
         paths:
-        - 'aks/**'
+        - 'eks/**'
 
 env:
     AWS_REGION: us-east-1
