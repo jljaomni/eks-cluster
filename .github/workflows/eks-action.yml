@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'aks/**'
+      - 'eks/**'
 
 env:
   AWS_REGION: us-east-1
@@ -42,11 +42,6 @@ jobs:
         id: plan
         run: terraform plan -no-color
         continue-on-error: false
-        working-directory: ./eks
-
-      - name: Terraform Apply
-        id: apply
-        run: terraform apply -auto-approve
         working-directory: ./eks
 
       - name: Success Message

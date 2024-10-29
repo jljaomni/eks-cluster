@@ -32,7 +32,7 @@ jobs:
               uses: aws-actions/configure-aws-credentials@v4
               with:
                 role-to-assume: arn:aws:iam::767397797617:role/github-actions-role
-                role-session-name: ecrrolesessiontemp
+                role-session-name: trfrolesessiontemp
                 aws-region: ${{ env.AWS_REGION }}
 
             - uses: hashicorp/setup-terraform@v3
